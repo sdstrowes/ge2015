@@ -38,7 +38,7 @@ gnuplot <<EOF
 	set size 0.99,0.47
 	set origin 0.01,0.01
 	set yrange [0:100]
-	set ylabel "Seat share (%)"
+	set ylabel "UK seat share (%)"
 
 	set arrow from "20150507",0 to "20150507",100 nohead lc rgb "red"
 	set arrow from "19700618",50 to "$xaxis_end",50 nohead lc rgb 'black'
@@ -51,7 +51,7 @@ gnuplot <<EOF
 
 	set size 0.99,0.47
 	set origin 0.01,0.48
-	set ylabel "Vote share (%)"
+	set ylabel "UK vote share (%)"
 
 	# remove xtic labels
 	set format x ""
@@ -71,7 +71,7 @@ gnuplot <<EOF
 	set size 0.99,0.47
 	set origin 0.01,0.01
 	set yrange [0:100]
-	set ylabel "Seat share (%)"
+	set ylabel "Scottish seat share (%)"
 
 	set arrow from "20150507",0 to "20150507",100 nohead lc rgb "red"
 	set arrow from "19700618",50 to "$xaxis_end",50 nohead lc rgb 'black'
@@ -85,7 +85,7 @@ gnuplot <<EOF
 
 	set size 0.99,0.47
 	set origin 0.01,0.48
-	set ylabel "Vote share (%)"
+	set ylabel "Scottish vote share (%)"
 	set format x ""
 	plot '<grep Con ge-data-scotland.gp' using 1:3 ti "Tory" w linespoints ls 1,\
 	     '<grep Lab ge-data-scotland.gp' using 1:3 ti "Labour" w linespoints ls 2,\
@@ -103,14 +103,15 @@ gnuplot <<EOF
 	set arrow from "19700618",0 to "$xaxis_end",0 nohead lc rgb "black"
 	set yrange [-50:50]
 	set format x "%b %Y"
-	set ylabel "% difference, votes to seat share"
 
+	set ylabel "% difference, votes to seat share (Scotland)"
 	set output "ge2015-sc-diff.png"
 	plot '<grep Con ge-data-scotland.gp' using 1:5 ti "Tory" w linespoints ls 1,\
 	     '<grep Lab ge-data-scotland.gp' using 1:5 ti "Labour" w linespoints ls 2,\
 	     '<grep Lib ge-data-scotland.gp' using 1:5 ti "Libs" w linespoints ls 3,\
 	     '<grep SNP ge-data-scotland.gp' using 1:5 ti "SNP" w linespoints ls 4
 
+	set ylabel "% difference, votes to seat share (UK)"
 	set output "ge2015-uk-diff.png"
 	plot '<grep Con ge-data.gp' using 1:5 ti "Tory" w linespoints ls 1,\
 	     '<grep Lab ge-data.gp' using 1:5 ti "Labour" w linespoints ls 2,\
