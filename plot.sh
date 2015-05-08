@@ -25,17 +25,17 @@ GP_PREAMBLE='
 
 	set style fill noborder
 
-	set key horiz at screen 0.5, 0.95 center
+	set key horiz at screen 0.5, 0.965 center
 '
 
 gnuplot <<EOF
-	set term pngcairo size 800,800 dashed
+	set term pngcairo size 800,700 dashed
 	$GP_PREAMBLE
 
 	set output "ge2015-uk.png"
 	set multiplot
 
-	set size 0.99,0.48
+	set size 0.99,0.47
 	set origin 0.01,0.01
 	set yrange [0:100]
 	set ylabel "Seat share (%)"
@@ -49,8 +49,8 @@ gnuplot <<EOF
 	     '<grep Lib ge-data.gp' using 1:4 ti "Libs" w linespoints ls 3,\
 	     '<grep SNP ge-data.gp' using 1:4 ti "SNP" w linespoints ls 4
 
-	set size 0.99,0.48
-	set origin 0.01,0.51
+	set size 0.99,0.47
+	set origin 0.01,0.48
 	set ylabel "Vote share (%)"
 
 	# remove xtic labels
@@ -62,13 +62,13 @@ gnuplot <<EOF
 EOF
 
 gnuplot <<EOF
-	set term pngcairo size 800,800 dashed
+	set term pngcairo size 800,700 dashed
 	$GP_PREAMBLE
 
 	set output "ge2015-sc.png"
 	set multiplot
 
-	set size 0.99,0.48
+	set size 0.99,0.47
 	set origin 0.01,0.01
 	set yrange [0:100]
 	set ylabel "Seat share (%)"
@@ -83,8 +83,8 @@ gnuplot <<EOF
 	     '<grep Lib ge-data-scotland.gp' using 1:4 ti "Libs" w linespoints ls 3,\
 	     '<grep SNP ge-data-scotland.gp' using 1:4 ti "SNP" w linespoints ls 4
 
-	set size 0.99,0.48
-	set origin 0.01,0.51
+	set size 0.99,0.47
+	set origin 0.01,0.48
 	set ylabel "Vote share (%)"
 	set format x ""
 	plot '<grep Con ge-data-scotland.gp' using 1:3 ti "Tory" w linespoints ls 1,\
@@ -97,6 +97,8 @@ gnuplot <<EOF
 	set term pngcairo size 800,300 dashed
 	$GP_PREAMBLE
 
+	set size 0.99,0.96
+	set origin 0.01,0.01
 	set arrow from "20150507",-50 to "20150507",50 nohead lc rgb "red"
 	set arrow from "19700618",0 to "$xaxis_end",0 nohead lc rgb "black"
 	set yrange [-50:50]
