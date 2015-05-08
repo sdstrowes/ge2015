@@ -87,7 +87,7 @@ gnuplot <<EOF
 	set ytics -50,10
 	set xzeroaxis lw 3
 	set xtic scale 0
-	set origin 0,0
+	set origin 0.01,0.01
 	set size 0.99,0.99
 	set border 2
 	set format x "%b %Y"
