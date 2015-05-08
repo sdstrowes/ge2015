@@ -44,9 +44,9 @@ gnuplot <<EOF
 	set arrow from "19700618",50 to "$xaxis_end",50 nohead lc rgb 'black'
 
 	set format x "%b %Y"
-	plot '<grep Con ge-data.gp' using 1:4 ti "Tory" w linespoints ls 1,\
+	plot '<grep Con ge-data.gp' using 1:4 ti "Conservative" w linespoints ls 1,\
 	     '<grep Lab ge-data.gp' using 1:4 ti "Labour" w linespoints ls 2,\
-	     '<grep Lib ge-data.gp' using 1:4 ti "Libs" w linespoints ls 3,\
+	     '<grep Lib ge-data.gp' using 1:4 ti "Lib Dems" w linespoints ls 3,\
 	     '<grep SNP ge-data.gp' using 1:4 ti "SNP" w linespoints ls 4
 
 	set size 0.99,0.47
@@ -55,9 +55,9 @@ gnuplot <<EOF
 
 	# remove xtic labels
 	set format x ""
-	plot '<grep Con ge-data.gp' using 1:3 ti "Tory" w linespoints ls 1,\
+	plot '<grep Con ge-data.gp' using 1:3 ti "Conservative" w linespoints ls 1,\
 	     '<grep Lab ge-data.gp' using 1:3 ti "Labour" w linespoints ls 2,\
-	     '<grep Lib ge-data.gp' using 1:3 ti "Libs" w linespoints ls 3,\
+	     '<grep Lib ge-data.gp' using 1:3 ti "Lib Dems" w linespoints ls 3,\
 	     '<grep SNP ge-data.gp' using 1:3 ti "SNP" w linespoints ls 4
 EOF
 
@@ -78,18 +78,18 @@ gnuplot <<EOF
 
 	# remove xtic labels
 	set format x "%b %Y"
-	plot '<grep Con ge-data-scotland.gp' using 1:4 ti "Tory" w linespoints ls 1,\
+	plot '<grep Con ge-data-scotland.gp' using 1:4 ti "Conservative" w linespoints ls 1,\
 	     '<grep Lab ge-data-scotland.gp' using 1:4 ti "Labour" w linespoints ls 2,\
-	     '<grep Lib ge-data-scotland.gp' using 1:4 ti "Libs" w linespoints ls 3,\
+	     '<grep Lib ge-data-scotland.gp' using 1:4 ti "Lib Dems" w linespoints ls 3,\
 	     '<grep SNP ge-data-scotland.gp' using 1:4 ti "SNP" w linespoints ls 4
 
 	set size 0.99,0.47
 	set origin 0.01,0.48
 	set ylabel "Scottish vote share (%)"
 	set format x ""
-	plot '<grep Con ge-data-scotland.gp' using 1:3 ti "Tory" w linespoints ls 1,\
+	plot '<grep Con ge-data-scotland.gp' using 1:3 ti "Conservative" w linespoints ls 1,\
 	     '<grep Lab ge-data-scotland.gp' using 1:3 ti "Labour" w linespoints ls 2,\
-	     '<grep Lib ge-data-scotland.gp' using 1:3 ti "Libs" w linespoints ls 3,\
+	     '<grep Lib ge-data-scotland.gp' using 1:3 ti "Lib Dems" w linespoints ls 3,\
 	     '<grep SNP ge-data-scotland.gp' using 1:3 ti "SNP" w linespoints ls 4
 EOF
 
@@ -106,16 +106,16 @@ gnuplot <<EOF
 
 	set ylabel "% difference, votes to seat share (Scotland)"
 	set output "ge2015-sc-diff.png"
-	plot '<grep Con ge-data-scotland.gp' using 1:5 ti "Tory" w linespoints ls 1,\
+	plot '<grep Con ge-data-scotland.gp' using 1:5 ti "Conservative" w linespoints ls 1,\
 	     '<grep Lab ge-data-scotland.gp' using 1:5 ti "Labour" w linespoints ls 2,\
-	     '<grep Lib ge-data-scotland.gp' using 1:5 ti "Libs" w linespoints ls 3,\
+	     '<grep Lib ge-data-scotland.gp' using 1:5 ti "Lib Dems" w linespoints ls 3,\
 	     '<grep SNP ge-data-scotland.gp' using 1:5 ti "SNP" w linespoints ls 4
 
 	set ylabel "% difference, votes to seat share (UK)"
 	set output "ge2015-uk-diff.png"
-	plot '<grep Con ge-data.gp' using 1:5 ti "Tory" w linespoints ls 1,\
+	plot '<grep Con ge-data.gp' using 1:5 ti "Conservative" w linespoints ls 1,\
 	     '<grep Lab ge-data.gp' using 1:5 ti "Labour" w linespoints ls 2,\
-	     '<grep Lib ge-data.gp' using 1:5 ti "Libs" w linespoints ls 3,\
+	     '<grep Lib ge-data.gp' using 1:5 ti "Lib Dems" w linespoints ls 3,\
 	     '<grep SNP ge-data.gp' using 1:5 ti "SNP" w linespoints ls 4
 EOF
 
