@@ -32,7 +32,7 @@ gnuplot <<EOF
 	set term pngcairo size 800,800 dashed
 	$GP_PREAMBLE
 
-	set output "ge2015-boxplot.png"
+	set output "ge2015-uk.png"
 	set multiplot
 
 	set size 0.99,0.48
@@ -65,7 +65,7 @@ gnuplot <<EOF
 	set term pngcairo size 800,800 dashed
 	$GP_PREAMBLE
 
-	set output "ge2015-scotland-stepped.png"
+	set output "ge2015-sc.png"
 	set multiplot
 
 	set size 0.99,0.48
@@ -103,13 +103,13 @@ gnuplot <<EOF
 	set format x "%b %Y"
 	set ylabel "% difference, votes to seat share"
 
-	set output "ge2015-scotland-diff.png"
+	set output "ge2015-sc-diff.png"
 	plot '<grep Con ge-data-scotland.gp' using 1:5 ti "Tory" w linespoints ls 1,\
 	     '<grep Lab ge-data-scotland.gp' using 1:5 ti "Labour" w linespoints ls 2,\
 	     '<grep Lib ge-data-scotland.gp' using 1:5 ti "Libs" w linespoints ls 3,\
 	     '<grep SNP ge-data-scotland.gp' using 1:5 ti "SNP" w linespoints ls 4
 
-	set output "ge2015-diff.png"
+	set output "ge2015-uk-diff.png"
 	plot '<grep Con ge-data.gp' using 1:5 ti "Tory" w linespoints ls 1,\
 	     '<grep Lab ge-data.gp' using 1:5 ti "Labour" w linespoints ls 2,\
 	     '<grep Lib ge-data.gp' using 1:5 ti "Libs" w linespoints ls 3,\
