@@ -1,60 +1,8 @@
 #!/bin/bash
 
-#awk '
-#BEGIN {
-#	date="19700618"
-#}
-#{
-#	if (date != $1) {
-#		print date, "Other", 100,                        100
-#		print date, "Lib", con_pc+lab_pc+lib_pc,         (con_seats+lab_seats+lib_seats)/total*100
-#		print date, "Lab", con_pc+lab_pc,                (con_seats+lab_seats)/total*100
-#		print date, "Con", con_pc,                       con_seats/total*100
-#		date=$1
-#	}
-#	total=$6
-#}
-#$2 ~ /^Con$/ {
-#	con_pc=$4
-#	con_seats=$5
-#}
-#$2 ~ /^Lab$/ {
-#	lab_pc=$4
-#	lab_seats=$5
-#}
-#$2 ~ /^Lib$/ {
-#	lib_pc=$4
-#	lib_seats=$5
-#}
-#END {
-#	print date, "Con", con_pc, con_seats, total
-#	print date, "Lab", lab_pc, lab_seats, total
-#	print date, "Lib", lib_pc, lib_seats, total
-#}' ge-data > ge-data.gp
-
 awk '{vote=$4; seats=$5/$6*100; delta=seats-vote; print $1,$2,vote, seats, delta}' ge-data > ge-data.gp
 awk '{vote=$4; seats=$5/$6*100; delta=seats-vote; print $1,$2,vote, seats, delta}' ge-data-scotland > ge-data-scotland.gp
 
-#awk '{print $0,(($5/$6*100)-$4)}' ge-data-scotland > ge-data-scotland-pc-diff
-
-#awk '{print $0,(($5/$6*100)-$4)}' ge-data > ge-data-pc-diff
-
-# awk '{
-#	total[$1] += $3;
-#	proportion[$1] += $4;
-#	seats[$1] += $5
-#}
-#END {
-#	for (i in total) {
-#		print i,"Total",total[i], proportion[i], seats[i]
-#	}
-#}' ge-data |
-#sort -k1,1n > ge-data-total
-
-
-#egrep "(Lab|Con)" ge-data |
-#awk '{total[$1] += $4} END {for (year in total) {print year, total[year]}}' |
-#sort -k1,1n > ge-labcon-total
 
 gnuplot <<EOF
 	set term pngcairo size 800,800 dashed
