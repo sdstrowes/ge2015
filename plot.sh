@@ -3,7 +3,7 @@
 awk '{vote=$4; seats=$5/$6*100; delta=seats-vote; print $1,$2,vote, seats, delta}' ge-data > ge-data.gp
 awk '{vote=$4; seats=$5/$6*100; delta=seats-vote; print $1,$2,vote, seats, delta}' ge-data-scotland > ge-data-scotland.gp
 
-xaxis_end=20180508
+xaxis_end=20210508
 GP_PREAMBLE='
 	set xdata time
 	set timefmt "%Y%m%d"
@@ -13,7 +13,7 @@ GP_PREAMBLE='
 	set tics nomirror
 	set xtics rotate
 	set ytics -100,10
-	set xtics("19700618", "19740228", "19741010", "19790503", "19830609", "19870611", "19920409", "19970501", "20010607", "20050505", "20100506", "20150507", "20200507")
+	set xtics("19700618", "19740228", "19741010", "19790503", "19830609", "19870611", "19920409", "19970501", "20010607", "20050505", "20100506", "20150507", "20170608", "20220507")
 
 	set xrange ["19700618":"'$xaxis_end'"]
 
@@ -40,7 +40,7 @@ gnuplot <<EOF
 	set yrange [0:100]
 	set ylabel "UK seat share (%)"
 
-	set arrow from "20150507",0 to "20150507",100 nohead lc rgb "red"
+	set arrow from "20170608",0 to "20170608",100 nohead lc rgb "red"
 	set arrow from "19700618",50 to "$xaxis_end",50 nohead lc rgb 'black'
 
 	set format x "%b %Y"
@@ -73,7 +73,7 @@ gnuplot <<EOF
 	set yrange [0:100]
 	set ylabel "Scottish seat share (%)"
 
-	set arrow from "20150507",0 to "20150507",100 nohead lc rgb "red"
+	set arrow from "20170608",0 to "20170608",100 nohead lc rgb "red"
 	set arrow from "19700618",50 to "$xaxis_end",50 nohead lc rgb 'black'
 
 	# remove xtic labels
@@ -99,7 +99,7 @@ gnuplot <<EOF
 
 	set size 0.99,0.96
 	set origin 0.01,0.01
-	set arrow from "20150507",-50 to "20150507",50 nohead lc rgb "red"
+	set arrow from "20170608",-50 to "20170608",50 nohead lc rgb "red"
 	set arrow from "19700618",0 to "$xaxis_end",0 nohead lc rgb "black"
 	set yrange [-50:50]
 	set format x "%b %Y"
