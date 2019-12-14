@@ -1,7 +1,7 @@
 #!/bin/bash
 
-awk '{vote=$4; seats=$5/$6*100; delta=seats-vote; print $1,$2,vote, seats, delta}' ge-data > ge-data.gp
-awk '{vote=$4; seats=$5/$6*100; delta=seats-vote; print $1,$2,vote, seats, delta}' ge-data-scotland > ge-data-scotland.gp
+awk '{vote=$4; seats=$5/$6*100; delta=seats-vote; print $1,$2,$3,vote, seats, delta}' ge-data > ge-data.gp
+awk '{vote=$4; seats=$5/$6*100; delta=seats-vote; print $1,$2,$3,vote, seats, delta}' ge-data-scotland > ge-data-scotland.gp
 
 electiondate=20191212
 xaxis_end=20241212
@@ -30,10 +30,41 @@ GP_PREAMBLE='
 '
 
 gnuplot <<EOF
-	set term pngcairo size 800,700 dashed
+	set term pngcairo size 1000,400 dashed
 	$GP_PREAMBLE
 
-	set output "ge2015-uk.png"
+	set ylabel "UK popular vote"
+	set ytics 0,1000000
+
+	set arrow from "$electiondate",0 to "$electiondate",20000000 nohead lc rgb "red"
+	set arrow from "19700618",50 to "$xaxis_end",50 nohead lc rgb 'black'
+
+	set format x "%b %Y"
+	set output "ge-uk-popvote.png"
+	plot '<grep Con ge-data.gp' using 1:3 ti "Conservative" w fsteps ls 1,\
+	     '<grep Lab ge-data.gp' using 1:3 ti "Labour" w fsteps ls 2,\
+	     '<grep Lib ge-data.gp' using 1:3 ti "Lib Dems" w fsteps ls 3,\
+	     '<grep SNP ge-data.gp' using 1:3 ti "SNP" w fsteps ls 4
+
+	#set size 0.99,0.47
+	#set origin 0.01,0.48
+	set ylabel "Scottish popular vote"
+
+	set ytics 0,250000
+	# remove xtic labels
+	set format x ""
+	set output "ge-sc-popvote.png"
+	plot '<grep Con ge-data-scotland.gp' using 1:3 ti "Conservative" w fsteps ls 1,\
+	     '<grep Lab ge-data-scotland.gp' using 1:3 ti "Labour" w fsteps ls 2,\
+	     '<grep Lib ge-data-scotland.gp' using 1:3 ti "Lib Dems" w fsteps ls 3,\
+	     '<grep SNP ge-data-scotland.gp' using 1:3 ti "SNP" w fsteps ls 4
+EOF
+
+gnuplot <<EOF
+	set term pngcairo size 1000,800 dashed
+	$GP_PREAMBLE
+
+	set output "ge-uk.png"
 	set multiplot
 
 	set size 0.99,0.47
@@ -45,10 +76,10 @@ gnuplot <<EOF
 	set arrow from "19700618",50 to "$xaxis_end",50 nohead lc rgb 'black'
 
 	set format x "%b %Y"
-	plot '<grep Con ge-data.gp' using 1:4 ti "Conservative" w fsteps ls 1,\
-	     '<grep Lab ge-data.gp' using 1:4 ti "Labour" w fsteps ls 2,\
-	     '<grep Lib ge-data.gp' using 1:4 ti "Lib Dems" w fsteps ls 3,\
-	     '<grep SNP ge-data.gp' using 1:4 ti "SNP" w fsteps ls 4
+	plot '<grep Con ge-data.gp' using 1:5 ti "Conservative" w fsteps ls 1,\
+	     '<grep Lab ge-data.gp' using 1:5 ti "Labour" w fsteps ls 2,\
+	     '<grep Lib ge-data.gp' using 1:5 ti "Lib Dems" w fsteps ls 3,\
+	     '<grep SNP ge-data.gp' using 1:5 ti "SNP" w fsteps ls 4
 
 	set size 0.99,0.47
 	set origin 0.01,0.48
@@ -56,17 +87,17 @@ gnuplot <<EOF
 
 	# remove xtic labels
 	set format x ""
-	plot '<grep Con ge-data.gp' using 1:3 ti "Conservative" w fsteps ls 1,\
-	     '<grep Lab ge-data.gp' using 1:3 ti "Labour" w fsteps ls 2,\
-	     '<grep Lib ge-data.gp' using 1:3 ti "Lib Dems" w fsteps ls 3,\
-	     '<grep SNP ge-data.gp' using 1:3 ti "SNP" w fsteps ls 4
+	plot '<grep Con ge-data.gp' using 1:4 ti "Conservative" w fsteps ls 1,\
+	     '<grep Lab ge-data.gp' using 1:4 ti "Labour" w fsteps ls 2,\
+	     '<grep Lib ge-data.gp' using 1:4 ti "Lib Dems" w fsteps ls 3,\
+	     '<grep SNP ge-data.gp' using 1:4 ti "SNP" w fsteps ls 4
 EOF
 
 gnuplot <<EOF
-	set term pngcairo size 800,700 dashed
+	set term pngcairo size 1000,800 dashed
 	$GP_PREAMBLE
 
-	set output "ge2015-sc.png"
+	set output "ge-sc.png"
 	set multiplot
 
 	set size 0.99,0.47
@@ -79,23 +110,23 @@ gnuplot <<EOF
 
 	# remove xtic labels
 	set format x "%b %Y"
-	plot '<grep Con ge-data-scotland.gp' using 1:4 ti "Conservative" w fsteps ls 1,\
-	     '<grep Lab ge-data-scotland.gp' using 1:4 ti "Labour" w fsteps ls 2,\
-	     '<grep Lib ge-data-scotland.gp' using 1:4 ti "Lib Dems" w fsteps ls 3,\
-	     '<grep SNP ge-data-scotland.gp' using 1:4 ti "SNP" w fsteps ls 4
+	plot '<grep Con ge-data-scotland.gp' using 1:5 ti "Conservative" w fsteps ls 1,\
+	     '<grep Lab ge-data-scotland.gp' using 1:5 ti "Labour" w fsteps ls 2,\
+	     '<grep Lib ge-data-scotland.gp' using 1:5 ti "Lib Dems" w fsteps ls 3,\
+	     '<grep SNP ge-data-scotland.gp' using 1:5 ti "SNP" w fsteps ls 4
 
 	set size 0.99,0.47
 	set origin 0.01,0.48
 	set ylabel "Scottish vote share (%)"
 	set format x ""
-	plot '<grep Con ge-data-scotland.gp' using 1:3 ti "Conservative" w fsteps ls 1,\
-	     '<grep Lab ge-data-scotland.gp' using 1:3 ti "Labour" w fsteps ls 2,\
-	     '<grep Lib ge-data-scotland.gp' using 1:3 ti "Lib Dems" w fsteps ls 3,\
-	     '<grep SNP ge-data-scotland.gp' using 1:3 ti "SNP" w fsteps ls 4
+	plot '<grep Con ge-data-scotland.gp' using 1:4 ti "Conservative" w fsteps ls 1,\
+	     '<grep Lab ge-data-scotland.gp' using 1:4 ti "Labour" w fsteps ls 2,\
+	     '<grep Lib ge-data-scotland.gp' using 1:4 ti "Lib Dems" w fsteps ls 3,\
+	     '<grep SNP ge-data-scotland.gp' using 1:4 ti "SNP" w fsteps ls 4
 EOF
 
 gnuplot <<EOF
-	set term pngcairo size 800,300 dashed
+	set term pngcairo size 1000,400 dashed
 	$GP_PREAMBLE
 
 	set size 0.99,0.96
@@ -106,17 +137,17 @@ gnuplot <<EOF
 	set format x "%b %Y"
 
 	set ylabel "% difference, votes to seat share (Scotland)"
-	set output "ge2015-sc-diff.png"
-	plot '<grep Con ge-data-scotland.gp' using 1:5 ti "Conservative" w fsteps ls 1,\
-	     '<grep Lab ge-data-scotland.gp' using 1:5 ti "Labour" w fsteps ls 2,\
-	     '<grep Lib ge-data-scotland.gp' using 1:5 ti "Lib Dems" w fsteps ls 3,\
-	     '<grep SNP ge-data-scotland.gp' using 1:5 ti "SNP" w fsteps ls 4
+	set output "ge-sc-diff.png"
+	plot '<grep Con ge-data-scotland.gp' using 1:6 ti "Conservative" w fsteps ls 1,\
+	     '<grep Lab ge-data-scotland.gp' using 1:6 ti "Labour" w fsteps ls 2,\
+	     '<grep Lib ge-data-scotland.gp' using 1:6 ti "Lib Dems" w fsteps ls 3,\
+	     '<grep SNP ge-data-scotland.gp' using 1:6 ti "SNP" w fsteps ls 4
 
 	set ylabel "% difference, votes to seat share (UK)"
-	set output "ge2015-uk-diff.png"
-	plot '<grep Con ge-data.gp' using 1:5 ti "Conservative" w fsteps ls 1,\
-	     '<grep Lab ge-data.gp' using 1:5 ti "Labour" w fsteps ls 2,\
-	     '<grep Lib ge-data.gp' using 1:5 ti "Lib Dems" w fsteps ls 3,\
-	     '<grep SNP ge-data.gp' using 1:5 ti "SNP" w fsteps ls 4
+	set output "ge-uk-diff.png"
+	plot '<grep Con ge-data.gp' using 1:6 ti "Conservative" w fsteps ls 1,\
+	     '<grep Lab ge-data.gp' using 1:6 ti "Labour" w fsteps ls 2,\
+	     '<grep Lib ge-data.gp' using 1:6 ti "Lib Dems" w fsteps ls 3,\
+	     '<grep SNP ge-data.gp' using 1:6 ti "SNP" w fsteps ls 4
 EOF
 
